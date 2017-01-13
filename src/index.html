@@ -36,6 +36,11 @@
 				<img rv-src="item.boxArtUrl"/>
 			</li>	
 		</ul>
+		<div class="menu-container-container">
+			<ul class="menu-container">
+				<li class="menu-item" rv-each-item="scope.menuItems">{item.name}</li>
+			</ul>
+		</div>
 	</section>
 </body>
 </html>

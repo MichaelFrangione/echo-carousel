@@ -2,6 +2,7 @@ window.onload=function() {
 
 	var ANIMATION_SPEED = 400;
 	var activeItemIndex = 0;
+	var activeMenuItemIndex = 3;
 	var isAnimating = false;
 	const LEFT = 0;
 	const RIGHT = 1;
@@ -42,6 +43,24 @@ window.onload=function() {
 		}
 	];
 
+	scope.menuItems = [
+		{
+			name: "USER SETTINGS"
+		},
+		{
+			name: "PURCHASED"
+		},
+		{
+			name: "JUST OPENED"
+		},	
+		{
+			name: "IN THEATERS"
+		},	
+		{
+			name: "COMING SOON"
+		}
+	]
+
 	var startingArray = scope.items.slice(0);
 
 	rivets.bind($('#container'), {
@@ -53,7 +72,7 @@ window.onload=function() {
 	var activeEl = $(".active .logo");
 	var backgroundEl = $(".background");
 	var previousBackgroundEl = $(".previous-background");
-
+	var menuItemsEl = $(".menu-container");
 
 	$(document).keydown(function(e) {
 		switch(e.keyCode) {
@@ -86,6 +105,7 @@ window.onload=function() {
 		scope.items.unshift(lastItem);
 		backgroundEl.css({'background-image': 'url('+ scope.activeItem.backgroundUrl +')'});
 		activeEl.css({'background-image': 'url('+ scope.activeItem.logoUrl +')'});
+		animateActiveMenuItem();
 	};
 
 	initCarousel(scope.items.length-1);
@@ -187,46 +207,82 @@ window.onload=function() {
 			return;
 		}
 
-			scope.previousItem = scope.activeItem;
+		scope.previousItem = scope.activeItem;
 
-		setTimeout( function () {
-			// RESET ARRAY TO ORIGINAL ORDER
-			scope.items = startingArray.slice(0);
-			scope.activeItem = scope.items[scope.items.length-1];
-			var lastItem = scope.items.pop();
-			scope.items.unshift(lastItem);
-			animateActive();
-		}, ANIMATION_SPEED);
+
 
 
 		if (dir == UP) {
-			animateSwimLaneChangeElement(containerLeftEl, UP);
-			animateSwimLaneChangeElement(containerRightEl, UP);
-			animateSwimLaneChangeElement($(".active"), UP);
+			if (activeMenuItemIndex - 1 > 0) {
+				animateSwimLaneChangeElement(containerLeftEl, UP);
+				animateSwimLaneChangeElement(containerRightEl, UP);
+				animateSwimLaneChangeElement($(".active"), UP);
+				animateActiveMenuItem(UP);
+
+				setTimeout( function () {
+					// RESET ARRAY TO ORIGINAL ORDER
+					scope.items = startingArray.slice(0);
+					scope.activeItem = scope.items[scope.items.length-1];
+					var lastItem = scope.items.pop();
+					scope.items.unshift(lastItem);
+					animateActive();
+				}, 400);
+			}
 		}
 		else {
-			animateSwimLaneChangeElement(containerLeftEl, DOWN);
-			animateSwimLaneChangeElement(containerRightEl, DOWN);
-			animateSwimLaneChangeElement($(".active"), DOWN);
+			if (activeMenuItemIndex + 1 <= scope.menuItems.length) {
+				animateSwimLaneChangeElement(containerLeftEl, DOWN);
+				animateSwimLaneChangeElement(containerRightEl, DOWN);
+				animateSwimLaneChangeElement($(".active"), DOWN);
+				animateActiveMenuItem(DOWN);
+
+				setTimeout( function () {
+					// RESET ARRAY TO ORIGINAL ORDER
+					scope.items = startingArray.slice(0);
+					scope.activeItem = scope.items[scope.items.length-1];
+					var lastItem = scope.items.pop();
+					scope.items.unshift(lastItem);
+					animateActive();
+				}, 200);
+			}
 		}
 	}
 
 	function animateSwimLaneChangeElement(el, dir) {
 
 		var yDir = (dir == UP) ? "53%" : "47%";
-		// var yOpp = (dir == UP) ? "-=" : "+=";
-
 		el.animate({
 			top: yDir,
 			opacity: 0
-		}, 400,
+		}, 200,
 			function () {
 				el.animate({
 					top: "50%",
 					opacity: 1
-			}, 400, function () {
+			}, 200, function () {
 				isAnimating = false;
 			});
 		});
-	} 
+	};
+
+	function animateActiveMenuItem(dir) {
+		if (dir == UP) {
+			activeMenuItemIndex--;
+			menuItemsEl.animate({marginTop: "+=30px"}, ANIMATION_SPEED)
+		}
+		else if (dir == DOWN) {
+			activeMenuItemIndex++;
+			menuItemsEl.animate({marginTop: "-=30px"}, ANIMATION_SPEED)
+		}
+
+		$("li", menuItemsEl).each(function () {
+			$(this).removeClass("prev");
+			$(this).removeClass("selected");
+			$(this).removeClass("next");
+		})
+
+		$("li:nth-child(" + (activeMenuItemIndex -1) + ")", menuItemsEl).addClass("prev");
+		$("li:nth-child(" + (activeMenuItemIndex) + ")", menuItemsEl).addClass("selected");
+		$("li:nth-child(" + (activeMenuItemIndex +1) + ")", menuItemsEl).addClass("next");
+	}
 };

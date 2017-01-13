@@ -1,6 +1,7 @@
 		* {			
 			box-sizing: border-box;
 			list-style: none;
+			font-family: 'Open Sans', sans-serif;
 		}
 
 		body {
@@ -47,6 +48,37 @@
 			width:100%;
 			height: 100%;
 			background: rgba(0,0,0,0.3);
+		}
+
+		.menu-container-container {
+			position: absolute;
+			top:75%;
+			left:100px;
+			overflow: hidden;
+			height:140px;
+		}
+		.menu-container {
+			margin:0;
+			padding:0;
+		}
+
+		.menu-container li {
+			color:#fff;
+			margin-bottom:10px;
+			font-size: 18px;
+		    font-weight: 100;
+			opacity: 0.1;
+			transition: all 400ms;
+			height:20px;
+		}
+
+		.menu-container li.selected {
+			opacity: 1;
+		}
+
+		.menu-container li.prev,
+		.menu-container li.next {
+			opacity: 0.3;
 		}
 
 		.item-container-left,
