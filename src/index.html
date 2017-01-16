@@ -21,7 +21,7 @@
 		<div class="background"></div>
 		<div class="background-overlay"></div>
 		<ul class="item-container-left">
-			<li class="item" rv-each-item="scope.items">
+			<li class="item" rv-each-item="scope.activeList.items">
 				<img rv-src="item.boxArtUrl"/>
 			</li>
 			<li class="item-hidden-left">
@@ -32,13 +32,13 @@
 			<div class="logo"></div>
 		</div>
 		<ul class="item-container-right">
-			<li class="item" rv-each-item="scope.items">
+			<li class="item" rv-each-item="scope.activeList.items">
 				<img rv-src="item.boxArtUrl"/>
 			</li>	
 		</ul>
 		<div class="menu-container-container">
 			<ul class="menu-container">
-				<li class="menu-item" rv-each-item="scope.menuItems">{item.name}</li>
+				<li class="menu-item" rv-each-item="scope.items">{item.name}</li>
 			</ul>
 		</div>
 	</section>
