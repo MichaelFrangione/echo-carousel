@@ -4,13 +4,15 @@ window.onload=function() {
 	var activeItemIndex = 0;
 	var activeMenuItemIndex = 3;
 	var isAnimating = false;
+
 	const LEFT = 0;
 	const RIGHT = 1;
 	const UP = 0;
 	const DOWN = 1;
 
 	var scope = {};
-	scope.items = [
+
+	scope.items1 = [
 		{
 			name: "Date Night",
 			boxArtUrl: "img/box_DN.png",
@@ -43,6 +45,45 @@ window.onload=function() {
 		}
 	];
 
+	scope.items2 = [
+		{
+			name: "La La Land",
+			boxArtUrl: "img/box_LA.png",
+			logoUrl: "img/logo_LA.png",
+			backgroundUrl: "img/background_LA.jpg"
+		},
+		{
+			name: "Passengers",
+			boxArtUrl: "img/box_PA.png",
+			logoUrl: "img/logo_PA.png",
+			backgroundUrl: "img/background_PA.jpg"
+		},
+		{
+			name: "Fast & The Furious 8",
+			boxArtUrl: "img/box_FF.png",
+			logoUrl: "img/logo_FF.png",
+			backgroundUrl: "img/background_FF.jpg"
+		},
+		{
+			name: "Kong of Skull Island",
+			boxArtUrl: "img/box_KO.png",
+			logoUrl: "img/logo_KO.png",
+			backgroundUrl: "img/background_KO.jpg"
+		},
+		{
+			name: "Fantastic Beasts",
+			boxArtUrl: "img/box_FB.png",
+			logoUrl: "img/logo_FB.png",
+			backgroundUrl: "img/background_FB.png"
+		}
+		// {
+		// 	name: "Arrival",
+		// 	boxArtUrl: "img/box_AR.png",
+		// 	logoUrl: "img/logo_AR.png",
+		// 	backgroundUrl: "img/background_AR.jpg"
+		// },
+	];
+
 	scope.menuItems = [
 		{
 			name: "USER SETTINGS"
@@ -61,7 +102,7 @@ window.onload=function() {
 		}
 	]
 
-	var startingArray = scope.items.slice(0);
+	scope.items = scope.items1;
 
 	rivets.bind($('#container'), {
 		scope: scope
@@ -209,9 +250,6 @@ window.onload=function() {
 
 		scope.previousItem = scope.activeItem;
 
-
-
-
 		if (dir == UP) {
 			if (activeMenuItemIndex - 1 > 0) {
 				animateSwimLaneChangeElement(containerLeftEl, UP);
@@ -220,8 +258,13 @@ window.onload=function() {
 				animateActiveMenuItem(UP);
 
 				setTimeout( function () {
-					// RESET ARRAY TO ORIGINAL ORDER
-					scope.items = startingArray.slice(0);
+
+					if (activeMenuItemIndex == 0 || activeMenuItemIndex == 2 || activeMenuItemIndex == 4) {
+						scope.items = scope.items2;
+					} else {
+						scope.items = scope.items1;
+					}
+
 					scope.activeItem = scope.items[scope.items.length-1];
 					var lastItem = scope.items.pop();
 					scope.items.unshift(lastItem);
@@ -237,8 +280,13 @@ window.onload=function() {
 				animateActiveMenuItem(DOWN);
 
 				setTimeout( function () {
-					// RESET ARRAY TO ORIGINAL ORDER
-					scope.items = startingArray.slice(0);
+
+					if (activeMenuItemIndex == 0 || activeMenuItemIndex == 2 || activeMenuItemIndex == 4) {
+						scope.items = scope.items2;
+					} else {
+						scope.items = scope.items1;
+					}
+
 					scope.activeItem = scope.items[scope.items.length-1];
 					var lastItem = scope.items.pop();
 					scope.items.unshift(lastItem);
@@ -266,6 +314,7 @@ window.onload=function() {
 	};
 
 	function animateActiveMenuItem(dir) {
+
 		if (dir == UP) {
 			activeMenuItemIndex--;
 			menuItemsEl.animate({marginTop: "+=30px"}, ANIMATION_SPEED)
