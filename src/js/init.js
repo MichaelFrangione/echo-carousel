@@ -4,64 +4,195 @@ window.onload=function() {
 	var activeItemIndex = 0;
 	var activeMenuItemIndex = 3;
 	var isAnimating = false;
+
 	const LEFT = 0;
 	const RIGHT = 1;
 	const UP = 0;
 	const DOWN = 1;
 
 	var scope = {};
-	scope.items = [
-		{
-			name: "Date Night",
-			boxArtUrl: "img/box_DN.png",
-			logoUrl: "img/logo_DN.png",
-			backgroundUrl: "img/background_DN.jpg"
-		},
-		{
-			name: "Tron",
-			boxArtUrl: "img/box_TR.png",
-			logoUrl: "img/logo_TR.png",
-			backgroundUrl: "img/background_TR.jpg"
-		},
-		{
-			name: "Despicable Me 2",
-			boxArtUrl: "img/box_DM.png",
-			logoUrl: "img/logo_DM.png",
-			backgroundUrl: "img/background_DM.png"
-		},
-		{
-			name: "Wonder Woman",
-			boxArtUrl: "img/box_WW.png",
-			logoUrl: "img/logo_WW.png",
-			backgroundUrl: "img/background_WW.png"
-		},
-		{
-			name: "Star Wars: Rogue One",
-			boxArtUrl: "img/box_SW.png",
-			logoUrl: "img/logo_SW.png",
-			backgroundUrl: "img/background_SW.png"
-		}
-	];
 
-	scope.menuItems = [
-		{
-			name: "USER SETTINGS"
-		},
-		{
-			name: "PURCHASED"
-		},
-		{
-			name: "JUST OPENED"
-		},	
-		{
-			name: "IN THEATERS"
-		},	
-		{
-			name: "COMING SOON"
-		}
+	var data = [	
+	{
+		name: "USER SETTINGS",
+		items: [
+			{
+				name: "Star Wars: Rogue One",
+				boxArtUrl: "img/box_SW.png",
+				logoUrl: "img/logo_SW.png",
+				backgroundUrl: "img/background_SW.png"
+			},
+			{
+				name: "Wonder Woman",
+				boxArtUrl: "img/box_WW.png",
+				logoUrl: "img/logo_WW.png",
+				backgroundUrl: "img/background_WW.png"
+			},
+			{
+				name: "Date Night",
+				boxArtUrl: "img/box_DN.png",
+				logoUrl: "img/logo_DN.png",
+				backgroundUrl: "img/background_DN.jpg"
+			},
+			{
+				name: "Tron",
+				boxArtUrl: "img/box_TR.png",
+				logoUrl: "img/logo_TR.png",
+				backgroundUrl: "img/background_TR.jpg"
+			},
+			{
+				name: "Despicable Me 2",
+				boxArtUrl: "img/box_DM.png",
+				logoUrl: "img/logo_DM.png",
+				backgroundUrl: "img/background_DM.png"
+			}
+		]
+	},
+	{
+		name: "PURCHASED",
+		items: [
+			{
+				name: "La La Land",
+				boxArtUrl: "img/box_LA.png",
+				logoUrl: "img/logo_LA.png",
+				backgroundUrl: "img/background_LA.jpg"
+			},
+			{
+				name: "Passengers",
+				boxArtUrl: "img/box_PA.png",
+				logoUrl: "img/logo_PA.png",
+				backgroundUrl: "img/background_PA.jpg"
+			},
+			{
+				name: "Fast & The Furious 8",
+				boxArtUrl: "img/box_FF.png",
+				logoUrl: "img/logo_FF.png",
+				backgroundUrl: "img/background_FF.jpg"
+			},
+			{
+				name: "Kong of Skull Island",
+				boxArtUrl: "img/box_KO.png",
+				logoUrl: "img/logo_KO.png",
+				backgroundUrl: "img/background_KO.jpg"
+			},
+			{
+				name: "Fantastic Beasts",
+				boxArtUrl: "img/box_FB.png",
+				logoUrl: "img/logo_FB.png",
+				backgroundUrl: "img/background_FB.png"
+			}
+		]
+	},
+	{
+		name: "JUST OPENED",
+		items: [
+			{
+				name: "Star Wars: Rogue One",
+				boxArtUrl: "img/box_SW.png",
+				logoUrl: "img/logo_SW.png",
+				backgroundUrl: "img/background_SW.png"
+			},
+			{
+				name: "Wonder Woman",
+				boxArtUrl: "img/box_WW.png",
+				logoUrl: "img/logo_WW.png",
+				backgroundUrl: "img/background_WW.png"
+			},
+			{
+				name: "Date Night",
+				boxArtUrl: "img/box_DN.png",
+				logoUrl: "img/logo_DN.png",
+				backgroundUrl: "img/background_DN.jpg"
+			},
+			{
+				name: "Tron",
+				boxArtUrl: "img/box_TR.png",
+				logoUrl: "img/logo_TR.png",
+				backgroundUrl: "img/background_TR.jpg"
+			},
+			{
+				name: "Despicable Me 2",
+				boxArtUrl: "img/box_DM.png",
+				logoUrl: "img/logo_DM.png",
+				backgroundUrl: "img/background_DM.png"
+			}
+		]
+	},
+	{
+		name: "IN THEATERS",
+		items: [
+			{
+				name: "La La Land",
+				boxArtUrl: "img/box_LA.png",
+				logoUrl: "img/logo_LA.png",
+				backgroundUrl: "img/background_LA.jpg"
+			},
+			{
+				name: "Passengers",
+				boxArtUrl: "img/box_PA.png",
+				logoUrl: "img/logo_PA.png",
+				backgroundUrl: "img/background_PA.jpg"
+			},
+			{
+				name: "Fast & The Furious 8",
+				boxArtUrl: "img/box_FF.png",
+				logoUrl: "img/logo_FF.png",
+				backgroundUrl: "img/background_FF.jpg"
+			},
+			{
+				name: "Kong of Skull Island",
+				boxArtUrl: "img/box_KO.png",
+				logoUrl: "img/logo_KO.png",
+				backgroundUrl: "img/background_KO.jpg"
+			},
+			{
+				name: "Fantastic Beasts",
+				boxArtUrl: "img/box_FB.png",
+				logoUrl: "img/logo_FB.png",
+				backgroundUrl: "img/background_FB.png"
+			}
+		]
+	},
+	{
+		name: "COMING SOON",
+		items: [
+			{
+				name: "Star Wars: Rogue One",
+				boxArtUrl: "img/box_SW.png",
+				logoUrl: "img/logo_SW.png",
+				backgroundUrl: "img/background_SW.png"
+			},
+			{
+				name: "Wonder Woman",
+				boxArtUrl: "img/box_WW.png",
+				logoUrl: "img/logo_WW.png",
+				backgroundUrl: "img/background_WW.png"
+			},
+			{
+				name: "Date Night",
+				boxArtUrl: "img/box_DN.png",
+				logoUrl: "img/logo_DN.png",
+				backgroundUrl: "img/background_DN.jpg"
+			},
+			{
+				name: "Tron",
+				boxArtUrl: "img/box_TR.png",
+				logoUrl: "img/logo_TR.png",
+				backgroundUrl: "img/background_TR.jpg"
+			},
+			{
+				name: "Despicable Me 2",
+				boxArtUrl: "img/box_DM.png",
+				logoUrl: "img/logo_DM.png",
+				backgroundUrl: "img/background_DM.png"
+			}
+		]
+	}
 	]
 
-	var startingArray = scope.items.slice(0);
+	scope.items = data;
+
+	scope.activeList = scope.items[activeMenuItemIndex-1];
 
 	rivets.bind($('#container'), {
 		scope: scope
@@ -98,17 +229,17 @@ window.onload=function() {
 	});
 
 	function initCarousel () {
-		scope.activeItem = scope.items[scope.items.length-1];
+		scope.activeItem = scope.activeList.items[0];
 		scope.previousItem = scope.activeItem;
 		console.log(scope.activeItem.name);
-		var lastItem = scope.items.pop();
-		scope.items.unshift(lastItem);
+		// var lastItem = scope.activeList.items.pop();
+		// scope.activeList.items.unshift(lastItem);
 		backgroundEl.css({'background-image': 'url('+ scope.activeItem.backgroundUrl +')'});
 		activeEl.css({'background-image': 'url('+ scope.activeItem.logoUrl +')'});
 		animateActiveMenuItem();
 	};
 
-	initCarousel(scope.items.length-1);
+	initCarousel();
 
 	function animateActive(dir) {
 		isAnimating = true;
@@ -140,7 +271,7 @@ window.onload=function() {
 
 		if (dir == LEFT) {
 
-			scope.activeItem = scope.items[scope.items.length-1];
+			scope.activeItem = scope.activeList.items[scope.activeList.items.length-1];
 
 			containerLeftEl.animate({
 				left: '+=200px'
@@ -155,8 +286,8 @@ window.onload=function() {
 			}, ANIMATION_SPEED);
 
 			$(".item", ".item-container-left").last().fadeOut(ANIMATION_SPEED, function () {
-				var lastItem = scope.items.pop();
-				scope.items.unshift(lastItem);
+				var lastItem = scope.activeList.items.pop();
+				scope.activeList.items.unshift(lastItem);
 				containerLeftEl.css({left: "-=200px"});
 				containerRightEl.css({right: "+=200px"});
 				isAnimating = false;
@@ -165,7 +296,7 @@ window.onload=function() {
 		}
 		else {		
 
-			scope.activeItem = scope.items[1];
+			scope.activeItem = scope.activeList.items[1];
 
 			var rightItemEl = $(".item", ".item-container-right").first().next();
 
@@ -173,8 +304,8 @@ window.onload=function() {
 				right: '+=200px'
 			}, ANIMATION_SPEED, function () {
 				containerRightEl.css({right: "-=200px"});
-				var first = scope.items.shift();
-				scope.items.push(first);
+				var first = scope.activeList.items.shift();
+				scope.activeList.items.push(first);
 				isAnimating = false;
 			});
 
@@ -199,6 +330,8 @@ window.onload=function() {
 		}
 		animateActive(dir);
 		console.log(scope.activeItem.name);
+		console.log(scope.activeList.items);
+
 	}
 
 	function switchSwimLane(dir) {
@@ -209,9 +342,6 @@ window.onload=function() {
 
 		scope.previousItem = scope.activeItem;
 
-
-
-
 		if (dir == UP) {
 			if (activeMenuItemIndex - 1 > 0) {
 				animateSwimLaneChangeElement(containerLeftEl, UP);
@@ -220,28 +350,30 @@ window.onload=function() {
 				animateActiveMenuItem(UP);
 
 				setTimeout( function () {
-					// RESET ARRAY TO ORIGINAL ORDER
-					scope.items = startingArray.slice(0);
-					scope.activeItem = scope.items[scope.items.length-1];
-					var lastItem = scope.items.pop();
-					scope.items.unshift(lastItem);
+					scope.activeList = scope.items[activeMenuItemIndex-1];
+					console.log(scope.activeList.items);
+					scope.activeItem = scope.activeList.items[0];
+					// scope.activeItem = scope.activeList.items[scope.activeList.items.length-1];
+					// var lastItem = scope.activeList.items.pop();
+					// scope.activeList.items.unshift(lastItem);
 					animateActive();
-				}, 400);
+				}, 200);
 			}
 		}
 		else {
-			if (activeMenuItemIndex + 1 <= scope.menuItems.length) {
+			if (activeMenuItemIndex + 1 <= scope.items.length) {
 				animateSwimLaneChangeElement(containerLeftEl, DOWN);
 				animateSwimLaneChangeElement(containerRightEl, DOWN);
 				animateSwimLaneChangeElement($(".active"), DOWN);
 				animateActiveMenuItem(DOWN);
 
 				setTimeout( function () {
-					// RESET ARRAY TO ORIGINAL ORDER
-					scope.items = startingArray.slice(0);
-					scope.activeItem = scope.items[scope.items.length-1];
-					var lastItem = scope.items.pop();
-					scope.items.unshift(lastItem);
+					scope.activeList = scope.items[activeMenuItemIndex-1];
+					console.log(scope.activeList.items);
+					scope.activeItem = scope.activeList.items[0];					
+					// scope.activeItem = scope.activeList.items[scope.activeList.items.length-1];
+					// var lastItem = scope.activeList.items.pop();
+					// scope.activeList.items.unshift(lastItem);
 					animateActive();
 				}, 200);
 			}
@@ -266,6 +398,7 @@ window.onload=function() {
 	};
 
 	function animateActiveMenuItem(dir) {
+
 		if (dir == UP) {
 			activeMenuItemIndex--;
 			menuItemsEl.animate({marginTop: "+=30px"}, ANIMATION_SPEED)
